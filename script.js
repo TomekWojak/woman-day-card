@@ -3,7 +3,9 @@ const terminalBody = document.querySelector(".terminal-body");
 const audio = document.getElementById("clickSound");
 const sendButton = document.getElementById("send-btn");
 let processing = false;
-
+const codeBtn = document.querySelector(".codeBtn");
+const codePopup = document.querySelector(".code-popup");
+const CODE = "YOU-ARE-AMAZING-01";
 if (isMobile) {
 	sendButton.style.display = "inline-block";
 } else {
@@ -43,7 +45,7 @@ const handleInput = () => {
 		lockInput();
 		currentStep = 3;
 		launchThirdStep();
-	} else if (currentStep === 3 && command === "posprzątaj") {
+	} else if (currentStep === 3 && command === "clean") {
 		lockInput();
 		currentStep = 4;
 		launchFourthStep();
@@ -51,7 +53,7 @@ const handleInput = () => {
 		lockInput();
 		currentStep = 5;
 		launchFifthStep();
-	} else if (currentStep === 5 && command === "toast") {
+	} else if (currentStep === 5 && command === "kod") {
 		lockInput();
 		currentStep = 6;
 		launchSixStep();
@@ -112,7 +114,7 @@ const launchThirdStep = async () => {
 	await wait(5000);
 	terminalBody.append(
 		createStaticAlert(
-			`Wpisz <span class="text-[#ff4d6d] accent font-semibold">posprzątaj</span> bo nabałaganiłaś 😄 a poza tym można oczopląsu dostać 🙄`,
+			`Wpisz <span class="text-[#ff4d6d] accent font-semibold">clean</span> bo nabałaganiłaś 😄 a poza tym można oczopląsu dostać 🙄`,
 		),
 	);
 	deleteAllLoadingSquares();
@@ -153,7 +155,7 @@ const launchFifthStep = async () => {
 	await wait(3000);
 	terminalBody.append(
 		createStaticAlert(
-			`Wpisz <span class="text-[#ff4d6d] accent font-semibold">toast</span> aby świętować razem 🍷 `,
+			`Wpisz <span class="text-[#ff4d6d] accent font-semibold"> kod</span> aby wygenerować klucz dostępu 🔐`,
 		),
 	);
 	deleteAllLoadingSquares();
@@ -166,14 +168,72 @@ const launchSixStep = async () => {
 	if (processing) return;
 	processing = true;
 
-	terminalBody.append(createStaticAlert("Zdrówko, za Ciebie! 🥂✨"));
+	terminalBody.append(createLoadingAlert("[1/4] Generowanie klucza dostępu"));
 	scrollToBottom();
 	await wait(4000);
-	const imgBox = document.querySelector(".img-box");
-	imgBox.classList.remove("opacity-0");
+	terminalBody.append(
+		createLoadingAlert("[2/4] Analiza poziomu uroku użytkowniczki"),
+	);
+	scrollToBottom();
+	await wait(4000);
+	terminalBody.append(
+		createLoadingAlert("[3/4] Weryfikacja unikalności sygnatury uśmiechu"),
+	);
+	scrollToBottom();
+	await wait(4000);
+	terminalBody.append(
+		createLoadingAlert("[4/4] Finalizacja tokenu bezpieczeństwa"),
+	);
+	scrollToBottom();
+	await wait(4000);
+	terminalBody.append(createStaticAlert("Oto twój klucz dostępu: "));
+	terminalBody.append(
+		createStaticAlert(`<span class="text-white font-semibold">${CODE}</span>`),
+	);
+	scrollToBottom();
+	deleteAllLoadingSquares();
+
+	await wait(3000);
+
+	showCodePopup();
 	processing = false;
 };
+const launchSeventhStep = async () => {
+	if (processing) return;
+	processing = true;
 
+	terminalBody.append(
+		createStaticAlert("Pomyślnie przeszłaś proces weryfikacji 🥳"),
+	);
+	scrollToBottom();
+	await wait(3000);
+	terminalBody.append(
+		createLoadingAlert("Ładowanie specjalnej wiadomości dla Ciebie"),
+	);
+	scrollToBottom();
+	await wait(4000);
+	showFinalImg();
+	await wait(5000);
+	document.getElementById("canvas").style.display = "block";
+	document.getElementById("canvas").style.opacity = "100";
+	document.getElementById("canvas").style.zIndex = "1";
+
+	Draw();
+
+	deleteAllLoadingSquares();
+	focusInputAutomatically();
+	processing = false;
+};
+const showCodePopup = () => {
+	codePopup.classList.add("flex");
+	codePopup.classList.remove("hidden");
+	codePopup.classList.remove("opacity-0");
+};
+const showFinalImg = () => {
+	const blurredPopup = document.querySelector(".blurred-popup");
+	blurredPopup.classList.remove("hidden");
+	blurredPopup.classList.remove("opacity-0");
+};
 const deleteAllLoadingSquares = () => {
 	document
 		.querySelectorAll(".dot")
@@ -287,11 +347,39 @@ const addClasses = (element, classes = []) => {
 		element.classList.add(cls);
 	});
 };
+
+const handleCodeBtn = async (e) => {
+	const input = document.getElementById("accesInput");
+	const error = document.querySelector(".error");
+	const btn = e.target;
+	error.textContent = "";
+	btn.textContent = "";
+	const loadingText = createLoadingAlert("Weryfikacja 😏");
+	loadingText.classList.add("justify-center");
+	btn.append(loadingText);
+	btn.setAttribute("disabled", "true");
+	await wait(3000);
+
+	if (input) {
+		if (input.value.trim().toLowerCase() === CODE.toLowerCase()) {
+			codePopup.classList.add("scale-0");
+			launchSeventhStep();
+		} else {
+			error.classList.remove("hidden");
+			error.textContent = "Błędny klucz";
+		}
+	}
+	btn.removeAttribute("disabled");
+	btn.textContent = "Zweryfikuj";
+};
+
+codeBtn.addEventListener("click", (e) => handleCodeBtn(e));
+
 let W = window.innerWidth;
 let H = window.innerHeight;
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
-const maxConfettis = 150;
+const maxConfettis = 130;
 const particles = [];
 
 const possibleColors = [

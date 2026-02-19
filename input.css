@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
+*::selection {
+	background-color: #ff4d6d;
+}
 @theme {
 	--font-hacker: "Fira Code", monospace;
 }
