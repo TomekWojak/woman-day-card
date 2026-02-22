@@ -31,6 +31,14 @@
 		opacity: 1;
 	}
 }
+@keyframes roseMove {
+	0% {
+		transform: rotateZ(20deg);
+	}
+	100% {
+		transform: rotateZ(-20deg);
+	}
+}
 canvas {
 	position: absolute;
 	overflow-y: hidden;

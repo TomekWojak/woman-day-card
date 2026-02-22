@@ -53,7 +53,7 @@ const handleInput = () => {
 		lockInput();
 		currentStep = 5;
 		launchFifthStep();
-	} else if (currentStep === 5 && command === "kod") {
+	} else if (currentStep === 5 && command === "analiza") {
 		lockInput();
 		currentStep = 6;
 		launchSixStep();
@@ -150,12 +150,13 @@ const launchFifthStep = async () => {
 	processing = true;
 	const rose = document.querySelector(".rose");
 	rose.classList.remove("scale-0");
+	rose.classList.add("animate-[roseMove_2s_ease-in-out_infinite_alternate]");
 	terminalBody.append(createStaticAlert("Dla Ciebie 😉"));
 	scrollToBottom();
 	await wait(3000);
 	terminalBody.append(
 		createStaticAlert(
-			`Wpisz <span class="text-[#ff4d6d] accent font-semibold"> kod</span> aby wygenerować klucz dostępu 🔐`,
+			`Wpisz <span class="text-[#ff4d6d] accent font-semibold"> analiza</span> aby rozpocząć proces weryfikacji 🔐`,
 		),
 	);
 	deleteAllLoadingSquares();
@@ -168,24 +169,49 @@ const launchSixStep = async () => {
 	if (processing) return;
 	processing = true;
 
-	terminalBody.append(createLoadingAlert("[1/4] Generowanie klucza dostępu"));
-	scrollToBottom();
-	await wait(4000);
 	terminalBody.append(
-		createLoadingAlert("[2/4] Analiza poziomu uroku użytkowniczki"),
+		createLoadingAlert(
+			"[1/5] Nawiązywanie połączenia z wyjątkową użytkowniczką",
+		),
 	);
 	scrollToBottom();
-	await wait(4000);
+	await wait(5000);
 	terminalBody.append(
-		createLoadingAlert("[3/4] Weryfikacja unikalności sygnatury uśmiechu"),
+		createLoadingAlert("[2/5] Analiza poziomu uroku użytkowniczki"),
 	);
 	scrollToBottom();
-	await wait(4000);
+	await wait(5000);
 	terminalBody.append(
-		createLoadingAlert("[4/4] Finalizacja tokenu bezpieczeństwa"),
+		createLoadingAlert("[3/5] Weryfikacja unikalności sygnatury uśmiechu"),
 	);
 	scrollToBottom();
+	await wait(5000);
+	terminalBody.append(
+		createLoadingAlert("[4/5] Testowanie odporności serwera na Twój urok"),
+	);
+	scrollToBottom();
+	await wait(5000);
+	terminalBody.append(
+		createLoadingAlert("[5/5] Synchronizacja z energią użytkowniczki"),
+	);
+	scrollToBottom();
+	await wait(5000);
+	terminalBody.append(
+		createStaticAlert(
+			'<span class="text-[#ff4d6d] font-semibold tracking-wide">Błąd krytyczny:</span> Poziom uroku przekracza normy systemowe.',
+		),
+	);
+	deleteAllLoadingSquares();
+	scrollToBottom();
 	await wait(4000);
+	terminalBody.append(createLoadingAlert("Przełączanie na tryb wyjątkowy"));
+	scrollToBottom();
+	await wait(5000);
+	terminalBody.append(
+		createLoadingAlert("Generowanie indywidualnego klucza dostępu"),
+	);
+	scrollToBottom();
+	await wait(5000);
 	terminalBody.append(createStaticAlert("Oto twój klucz dostępu: "));
 	terminalBody.append(
 		createStaticAlert(`<span class="text-white font-semibold">${CODE}</span>`),
@@ -193,7 +219,7 @@ const launchSixStep = async () => {
 	scrollToBottom();
 	deleteAllLoadingSquares();
 
-	await wait(3000);
+	await wait(5000);
 
 	showCodePopup();
 	processing = false;
@@ -214,11 +240,6 @@ const launchSeventhStep = async () => {
 	await wait(4000);
 	showFinalImg();
 	await wait(5000);
-	document.getElementById("canvas").style.display = "block";
-	document.getElementById("canvas").style.opacity = "100";
-	document.getElementById("canvas").style.zIndex = "1";
-
-	Draw();
 
 	deleteAllLoadingSquares();
 	focusInputAutomatically();
