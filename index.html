@@ -100,15 +100,25 @@ w-full h-10 sm:h-12 rounded-lg caret-[#ff4d6d] outline-[#ff4d6d] outline-1 font-
 
     <audio id="clickSound" src="./emotional-and-memorable-piano-music.mp3"></audio>
     <canvas id="canvas"></canvas>
-    <div class="blurred-popup opacity-0 transition-opacity hidden absolute inset-0 w-full h-full backdrop-blur-sm">
-        <div class="flex pointer-events-none select-none transition-opacity duration-1000 img-box w-[80%] text-center max-w-110 bg-[#1a000f] p-5 flex-col items-center border border-[#ff4d6d]/30
+    <div class="blurred-popup hidden opacity-0 transition-opacity absolute inset-0 w-full h-full backdrop-blur-sm">
+        <div class="flex pointer-events-none select-none transition-opacity duration-1000 img-box w-[80%] text-center max-w-120 bg-[#1a000f] flex-col items-center border border-[#ff4d6d]/30
  absolute left-1/2 top-1/2 -translate-1/2 shadow-[0_0_20px_rgba(255,77,109,0.05)]
-text-[#ffd6e0] rounded-xl
+text-[#ffd6e0] rounded-xl before:content-[''] before:absolute before:inset-0 before:bg-linear-to-t
+      before:from-black/90
+      before:via-40%
+      before:via-black/40
+      before:to-black/0 before:z-5 before:rounded-xl
 ">
-            <h1 class="font-hacker mb-5 text-sm sm:text-lg lg:text-[1.3rem]">Wszystkiego najlepszego z okazji Dnia
-                Kobiet!
-                💐🌸💕</h1>
-            <img src="./1771457846912.jpg" class="brightness-85 rounded-xl w-full" alt="">
+            <h1
+                class="absolute px-3 text-shadow-2xs z-10 font-hacker mb-5 text-[#E6E1D9] bottom-0 text-sm sm:text-lg lg:text-[1.1rem]">
+                Z
+                okazji Dnia
+                Kobiet życzę Ci
+                morza
+                radości, spełnienia najskrytszych marzeń, niegasnącego uśmiechu oraz samych pięknych chwil każdego dnia.
+                Niech świat zawsze docenia Twoją siłę, mądrość i wyjątkowość.
+            </h1>
+            <img src="./rachaeljwallin-flowers-5813110_1920.jpg" class="brightness-85 rounded-xl w-full" alt="">
         </div>
     </div>
 </body>
