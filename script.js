@@ -45,17 +45,13 @@ const handleInput = () => {
 		lockInput();
 		currentStep = 3;
 		launchThirdStep();
-	} else if (currentStep === 3 && command === "clean") {
+	} else if (currentStep === 3 && command === "róża") {
 		lockInput();
 		currentStep = 4;
-		launchFourthStep();
-	} else if (currentStep === 4 && command === "róża") {
+		launchFifthStep();
+	} else if (currentStep === 4 && command === "analiza") {
 		lockInput();
 		currentStep = 5;
-		launchFifthStep();
-	} else if (currentStep === 5 && command === "analiza") {
-		lockInput();
-		currentStep = 6;
 		launchSixStep();
 	}
 };
@@ -114,28 +110,6 @@ const launchThirdStep = async () => {
 	await wait(5000);
 	terminalBody.append(
 		createStaticAlert(
-			`Wpisz <span class="text-[#ff4d6d] accent font-semibold">clean</span> bo nabałaganiłaś 😄 a poza tym można oczopląsu dostać 🙄`,
-		),
-	);
-	deleteAllLoadingSquares();
-	terminalBody.append(createInput());
-
-	focusInputAutomatically();
-	processing = false;
-};
-const launchFourthStep = async () => {
-	if (processing) return;
-	processing = true;
-
-	document.getElementById("canvas").style.opacity = 0;
-	terminalBody.append(createLoadingAlert("Sprzątanie 🙄"));
-	scrollToBottom();
-
-	await wait(3000);
-	document.getElementById("canvas").style.display = "none";
-	terminalBody.append(createStaticAlert("Gotowe 💗"));
-	terminalBody.append(
-		createStaticAlert(
 			`Wpisz <span class="text-[#ff4d6d] accent font-semibold">róża</span> aby otrzymać wirtualną różę 🌹 `,
 		),
 	);
@@ -145,6 +119,7 @@ const launchFourthStep = async () => {
 	focusInputAutomatically();
 	processing = false;
 };
+
 const launchFifthStep = async () => {
 	if (processing) return;
 	processing = true;
@@ -170,29 +145,22 @@ const launchSixStep = async () => {
 	processing = true;
 
 	terminalBody.append(
-		createLoadingAlert(
-			"[1/5] Nawiązywanie połączenia z wyjątkową użytkowniczką",
-		),
+		createLoadingAlert("[1/4] Analiza poziomu uroku użytkowniczki"),
 	);
 	scrollToBottom();
 	await wait(5000);
 	terminalBody.append(
-		createLoadingAlert("[2/5] Analiza poziomu uroku użytkowniczki"),
+		createLoadingAlert("[2/4] Weryfikacja unikalności sygnatury uśmiechu"),
 	);
 	scrollToBottom();
 	await wait(5000);
 	terminalBody.append(
-		createLoadingAlert("[3/5] Weryfikacja unikalności sygnatury uśmiechu"),
+		createLoadingAlert("[3/4] Testowanie odporności serwera na Twój urok"),
 	);
 	scrollToBottom();
 	await wait(5000);
 	terminalBody.append(
-		createLoadingAlert("[4/5] Testowanie odporności serwera na Twój urok"),
-	);
-	scrollToBottom();
-	await wait(5000);
-	terminalBody.append(
-		createLoadingAlert("[5/5] Synchronizacja z energią użytkowniczki"),
+		createLoadingAlert("[4/4] Synchronizacja z energią użytkowniczki"),
 	);
 	scrollToBottom();
 	await wait(5000);
@@ -204,9 +172,6 @@ const launchSixStep = async () => {
 	deleteAllLoadingSquares();
 	scrollToBottom();
 	await wait(4000);
-	terminalBody.append(createLoadingAlert("Przełączanie na tryb wyjątkowy"));
-	scrollToBottom();
-	await wait(5000);
 	terminalBody.append(
 		createLoadingAlert("Generowanie indywidualnego klucza dostępu"),
 	);
